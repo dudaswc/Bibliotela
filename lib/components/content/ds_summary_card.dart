@@ -56,7 +56,14 @@ class DsSummaryCard extends StatelessWidget {
               children: [
                 Text('$booksFinished', style: AppTypography.displayLarge.copyWith(color: c.onSurface)),
                 const SizedBox(width: 6),
-                Text(booksFinished == 1 ? 'livro lido' : 'livros lidos', style: AppTypography.titleUnit.copyWith(color: c.onSurface)),
+                Flexible(
+                  child: Text(
+                    booksFinished == 1 ? 'livro lido' : 'livros lidos',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.titleUnit.copyWith(color: c.onSurface),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 2),

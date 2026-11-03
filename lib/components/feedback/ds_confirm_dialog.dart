@@ -38,23 +38,28 @@ class DsConfirmDialogCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           Text(message, style: AppTypography.bodyMedium.copyWith(color: c.onSurfaceMuted)),
           const SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              DsActionButton(
-                viewModel: ActionButtonViewModel(label: cancelLabel, variant: ActionButtonVariant.text, size: ActionButtonSize.compact),
-                onPressed: onCancel,
-              ),
-              const SizedBox(width: 6),
-              DsActionButton(
-                viewModel: ActionButtonViewModel(
-                  label: confirmLabel,
-                  variant: destructive ? ActionButtonVariant.danger : ActionButtonVariant.primary,
-                  size: ActionButtonSize.compact,
+          SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              alignment: WrapAlignment.end,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                DsActionButton(
+                  viewModel: ActionButtonViewModel(label: cancelLabel, variant: ActionButtonVariant.text, size: ActionButtonSize.compact),
+                  onPressed: onCancel,
                 ),
-                onPressed: onConfirm,
-              ),
-            ],
+                DsActionButton(
+                  viewModel: ActionButtonViewModel(
+                    label: confirmLabel,
+                    variant: destructive ? ActionButtonVariant.danger : ActionButtonVariant.primary,
+                    size: ActionButtonSize.compact,
+                  ),
+                  onPressed: onConfirm,
+                ),
+              ],
+            ),
           ),
         ],
       ),

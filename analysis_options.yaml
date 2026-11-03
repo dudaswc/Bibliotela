@@ -1,4 +1,8 @@
-linter:
-  rules:
-    prefer_const_constructors: true
-    prefer_const_literals_to_create_immutables: true
+# As regras de estilo prefer_const_* ficam desligadas: o catalogo mistura
+# widgets const e nao-const de proposito (varios dependem do tema).
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**

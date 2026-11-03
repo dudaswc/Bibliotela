@@ -26,3 +26,7 @@ ios/Pods/
 
 # macOS
 .DS_Store
+
+# Arquivos gerados pelo Flutter no iOS
+ios/Flutter/ephemeral/
+ios/Runner/GeneratedPluginRegistrant.*
