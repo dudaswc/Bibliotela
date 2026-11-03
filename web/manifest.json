@@ -1,0 +1,12 @@
+{
+  "name": "Design System da Bibliotela",
+  "short_name": "Bibliotela DS",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F8F6F3",
+  "theme_color": "#0F6E8C",
+  "description": "Catálogo interativo de componentes do Design System da Bibliotela (livros, séries e filmes)",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Bibliotela DS Catalog (Flutter)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": { "label": "Catálogo (Flutter web)", "onAutoForward": "notify" }
+  },
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/flutter/bin"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["Dart-Code.dart-code", "Dart-Code.flutter"]
+    }
+  }
+}
