@@ -15,7 +15,7 @@ O aplicativo não é o app da Bibliotela. Seu foco é demonstrar os elementos re
 
 ## Design no Figma
 
-[Adicione aqui o link do arquivo do Figma]
+[https://www.figma.com/design/pr5Ed18JewDOHMbxfpA1IW/Bibliotela-%C2%B7-DS---Estudo-Claude?node-id=9-3&t=74GJbddj4y0NSMwz-1]
 
 As categorias, os nomes dos componentes, os estados e os tokens deste catálogo são os mesmos do arquivo do Figma: uma página por categoria.
 
