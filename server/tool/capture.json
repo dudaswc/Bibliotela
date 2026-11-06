@@ -1,0 +1,5 @@
+cd /workspaces/Bibliotela
+git add server
+git commit -m "Servidor mock: script de captura"
+git pull --rebase
+git push
