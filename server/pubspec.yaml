@@ -1,0 +1,10 @@
+name: bibliotela_server
+description: Servidor mock da API da Bibliotela (livros, series e filmes).
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dev_dependencies:
+  test: ^1.24.0
