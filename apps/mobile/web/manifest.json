@@ -1,0 +1,12 @@
+{
+  "name": "Bibliotela",
+  "short_name": "Bibliotela",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F8F6F3",
+  "theme_color": "#0F6E8C",
+  "description": "Bibliotela: livros, séries e filmes que você leu e assistiu",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": []
+}

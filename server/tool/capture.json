@@ -1,5 +1,1463 @@
-cd /workspaces/Bibliotela
-git add server
-git commit -m "Servidor mock: script de captura"
-git pull --rebase
-git push
+{
+  "generatedAt": "2026-11-06T23:02:34.496618Z",
+  "serverVersion": "0.1.0",
+  "entries": [
+    {
+      "id": "health",
+      "title": "Saude",
+      "doc": true,
+      "method": "GET",
+      "path": "/health",
+      "requestHeaders": {},
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "status": "ok",
+        "version": "0.1.0"
+      },
+      "elapsedMs": 81
+    },
+    {
+      "id": "login_ok",
+      "title": "Login",
+      "doc": true,
+      "method": "POST",
+      "path": "/auth/login",
+      "requestHeaders": {
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "email": "ana@bibliotela.dev",
+        "password": "123456"
+      },
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "token": "tok_r37k8q6plx8j0wrfblz6aojz",
+        "user": {
+          "id": "usr_01",
+          "name": "Ana Ribeiro",
+          "email": "ana@bibliotela.dev",
+          "avatarUrl": null,
+          "createdAt": "2024-03-11T09:00:00Z"
+        }
+      },
+      "elapsedMs": 7
+    },
+    {
+      "id": "login_invalid",
+      "title": "Login com senha errada",
+      "doc": true,
+      "method": "POST",
+      "path": "/auth/login",
+      "requestHeaders": {
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "email": "ana@bibliotela.dev",
+        "password": "errada"
+      },
+      "status": 401,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "invalid_credentials",
+          "message": "Invalid email or password"
+        }
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "login_empty",
+      "title": "Login com campos vazios",
+      "doc": true,
+      "method": "POST",
+      "path": "/auth/login",
+      "requestHeaders": {
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "email": "",
+        "password": ""
+      },
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid login",
+          "fields": {
+            "email": "must not be empty",
+            "password": "must not be empty"
+          }
+        }
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "login_malformed",
+      "title": "Login com JSON malformado",
+      "doc": true,
+      "method": "POST",
+      "path": "/auth/login",
+      "requestHeaders": {
+        "Content-Type": "application/json"
+      },
+      "requestBody": "{\"email\": ",
+      "status": 400,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "bad_request",
+          "message": "Malformed JSON body"
+        }
+      },
+      "elapsedMs": 2
+    },
+    {
+      "id": "me_get",
+      "title": "Usuario da sessao",
+      "doc": true,
+      "method": "GET",
+      "path": "/me",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "usr_01",
+        "name": "Ana Ribeiro",
+        "email": "ana@bibliotela.dev",
+        "avatarUrl": null,
+        "createdAt": "2024-03-11T09:00:00Z"
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "me_put",
+      "title": "Atualizar nome e avatar",
+      "doc": true,
+      "method": "PUT",
+      "path": "/me",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "name": "Ana R.",
+        "avatarUrl": null
+      },
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "usr_01",
+        "name": "Ana R.",
+        "email": "ana@bibliotela.dev",
+        "avatarUrl": null,
+        "createdAt": "2024-03-11T09:00:00Z"
+      },
+      "elapsedMs": 4
+    },
+    {
+      "id": "me_put_invalid",
+      "title": "Atualizar com nome vazio",
+      "doc": true,
+      "method": "PUT",
+      "path": "/me",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "name": "   "
+      },
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid profile",
+          "fields": {
+            "name": "must not be empty"
+          }
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "me_restore",
+      "title": "Restaurar o nome",
+      "doc": false,
+      "method": "PUT",
+      "path": "/me",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "name": "Ana Ribeiro",
+        "avatarUrl": null
+      },
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "usr_01",
+        "name": "Ana Ribeiro",
+        "email": "ana@bibliotela.dev",
+        "avatarUrl": null,
+        "createdAt": "2024-03-11T09:00:00Z"
+      },
+      "elapsedMs": 2
+    },
+    {
+      "id": "genres",
+      "title": "Generos",
+      "doc": true,
+      "method": "GET",
+      "path": "/genres",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [
+          "Ação",
+          "Aventura",
+          "Biografia",
+          "Comédia",
+          "Documentário",
+          "Drama",
+          "Fantasia",
+          "Ficção científica",
+          "Romance",
+          "Suspense",
+          "Terror",
+          "Outros"
+        ]
+      },
+      "elapsedMs": 4
+    },
+    {
+      "id": "summary_2026",
+      "title": "Resumo de 2026",
+      "doc": true,
+      "method": "GET",
+      "path": "/summary?year=2026",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "year": 2026,
+        "books": {
+          "finished": 9,
+          "pages": 3024
+        },
+        "movies": {
+          "finished": 8,
+          "minutes": 1102
+        },
+        "series": {
+          "finished": 4,
+          "seasons": 11
+        },
+        "averageRating": 8.5,
+        "byGenre": [
+          {
+            "genre": "Ficção científica",
+            "count": 5
+          },
+          {
+            "genre": "Drama",
+            "count": 4
+          },
+          {
+            "genre": "Comédia",
+            "count": 3
+          },
+          {
+            "genre": null,
+            "count": 2
+          },
+          {
+            "genre": "Romance",
+            "count": 2
+          },
+          {
+            "genre": "Suspense",
+            "count": 2
+          },
+          {
+            "genre": "Fantasia",
+            "count": 1
+          },
+          {
+            "genre": "Outros",
+            "count": 1
+          },
+          {
+            "genre": "Terror",
+            "count": 1
+          }
+        ]
+      },
+      "elapsedMs": 26
+    },
+    {
+      "id": "summary_empty",
+      "title": "Resumo de um ano sem nada concluido",
+      "doc": true,
+      "method": "GET",
+      "path": "/summary?year=1999",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "year": 1999,
+        "books": {
+          "finished": 0,
+          "pages": 0
+        },
+        "movies": {
+          "finished": 0,
+          "minutes": 0
+        },
+        "series": {
+          "finished": 0,
+          "seasons": 0
+        },
+        "averageRating": null,
+        "byGenre": []
+      },
+      "elapsedMs": 7
+    },
+    {
+      "id": "summary_invalid",
+      "title": "Resumo com ano invalido",
+      "doc": true,
+      "method": "GET",
+      "path": "/summary?year=26",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid query",
+          "fields": {
+            "year": "must be in the format YYYY"
+          }
+        }
+      },
+      "elapsedMs": 4
+    },
+    {
+      "id": "items_default",
+      "title": "Lista, duas por pagina",
+      "doc": true,
+      "method": "GET",
+      "path": "/items?pageSize=2",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [
+          {
+            "id": "it_0039",
+            "type": "movie",
+            "title": "Titanic",
+            "genre": "Romance",
+            "status": "in_progress",
+            "startedAt": "2026-10-30",
+            "finishedAt": null,
+            "rating": null,
+            "note": null,
+            "pages": null,
+            "author": null,
+            "seasons": null,
+            "durationMinutes": 195,
+            "addedAt": "2026-10-24T12:30:00Z"
+          },
+          {
+            "id": "it_0009",
+            "type": "book",
+            "title": "Drácula",
+            "genre": "Terror",
+            "status": "done",
+            "startedAt": "2026-10-01",
+            "finishedAt": "2026-10-14",
+            "rating": 8,
+            "note": null,
+            "pages": 488,
+            "author": "Bram Stoker",
+            "seasons": null,
+            "durationMinutes": null,
+            "addedAt": "2026-09-25T12:30:00Z"
+          }
+        ],
+        "page": 1,
+        "pageSize": 2,
+        "total": 45
+      },
+      "elapsedMs": 35
+    },
+    {
+      "id": "items_filtered",
+      "title": "Lista com filtros",
+      "doc": true,
+      "method": "GET",
+      "path": "/items?year=2026&status=done&type=book&pageSize=2",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [
+          {
+            "id": "it_0009",
+            "type": "book",
+            "title": "Drácula",
+            "genre": "Terror",
+            "status": "done",
+            "startedAt": "2026-10-01",
+            "finishedAt": "2026-10-14",
+            "rating": 8,
+            "note": null,
+            "pages": 488,
+            "author": "Bram Stoker",
+            "seasons": null,
+            "durationMinutes": null,
+            "addedAt": "2026-09-25T12:30:00Z"
+          },
+          {
+            "id": "it_0001",
+            "type": "book",
+            "title": "Duna",
+            "genre": "Ficção científica",
+            "status": "done",
+            "startedAt": "2026-08-12",
+            "finishedAt": "2026-09-06",
+            "rating": 9,
+            "note": "Final inesperado",
+            "pages": 680,
+            "author": "Frank Herbert",
+            "seasons": null,
+            "durationMinutes": null,
+            "addedAt": "2026-07-30T18:20:00Z"
+          }
+        ],
+        "page": 1,
+        "pageSize": 2,
+        "total": 9
+      },
+      "elapsedMs": 9
+    },
+    {
+      "id": "items_search",
+      "title": "Busca por titulo ou autor",
+      "doc": true,
+      "method": "GET",
+      "path": "/items?q=tolkien",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [
+          {
+            "id": "it_0024",
+            "type": "book",
+            "title": "O Hobbit",
+            "genre": "Fantasia",
+            "status": "done",
+            "startedAt": "2025-07-05",
+            "finishedAt": "2025-07-29",
+            "rating": 8,
+            "note": null,
+            "pages": 336,
+            "author": "J. R. R. Tolkien",
+            "seasons": null,
+            "durationMinutes": null,
+            "addedAt": "2025-06-29T12:30:00Z"
+          }
+        ],
+        "page": 1,
+        "pageSize": 20,
+        "total": 1
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "items_past_end",
+      "title": "Pagina alem do fim",
+      "doc": true,
+      "method": "GET",
+      "path": "/items?page=99",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [],
+        "page": 99,
+        "pageSize": 20,
+        "total": 45
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "items_invalid",
+      "title": "Parametros invalidos",
+      "doc": true,
+      "method": "GET",
+      "path": "/items?year=26&status=lendo&page=0",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid query",
+          "fields": {
+            "year": "must be in the format YYYY",
+            "status": "must be one of: want, in_progress, done",
+            "page": "must be an integer greater than or equal to 1"
+          }
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "item_get",
+      "title": "Um item",
+      "doc": true,
+      "method": "GET",
+      "path": "/items/it_0001",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "it_0001",
+        "type": "book",
+        "title": "Duna",
+        "genre": "Ficção científica",
+        "status": "done",
+        "startedAt": "2026-08-12",
+        "finishedAt": "2026-09-06",
+        "rating": 9,
+        "note": "Final inesperado",
+        "pages": 680,
+        "author": "Frank Herbert",
+        "seasons": null,
+        "durationMinutes": null,
+        "addedAt": "2026-07-30T18:20:00Z"
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "item_404",
+      "title": "Item inexistente",
+      "doc": true,
+      "method": "GET",
+      "path": "/items/it_9999",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 404,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "not_found",
+          "message": "Item it_9999 not found"
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "item_create",
+      "title": "Criar um item",
+      "doc": true,
+      "method": "POST",
+      "path": "/items",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "type": "book",
+        "title": "Duna",
+        "genre": "Ficção científica",
+        "status": "done",
+        "startedAt": "2026-08-12",
+        "finishedAt": "2026-09-06",
+        "rating": 9,
+        "note": "Final inesperado",
+        "pages": 680,
+        "author": "Frank Herbert",
+        "seasons": null,
+        "durationMinutes": null
+      },
+      "status": 201,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "it_0046",
+        "type": "book",
+        "title": "Duna",
+        "genre": "Ficção científica",
+        "status": "done",
+        "startedAt": "2026-08-12",
+        "finishedAt": "2026-09-06",
+        "rating": 9,
+        "note": "Final inesperado",
+        "pages": 680,
+        "author": "Frank Herbert",
+        "seasons": null,
+        "durationMinutes": null,
+        "addedAt": "2026-11-06T23:02:33Z"
+      },
+      "elapsedMs": 10
+    },
+    {
+      "id": "item_create_discard",
+      "title": "Criar descartando o que nao vale",
+      "doc": true,
+      "method": "POST",
+      "path": "/items",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "type": "movie",
+        "title": "  Interestelar  ",
+        "genre": "",
+        "status": "want",
+        "startedAt": "2026-10-01",
+        "rating": 9,
+        "pages": 300,
+        "durationMinutes": 169
+      },
+      "status": 201,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "it_0047",
+        "type": "movie",
+        "title": "Interestelar",
+        "genre": null,
+        "status": "want",
+        "startedAt": null,
+        "finishedAt": null,
+        "rating": null,
+        "note": null,
+        "pages": null,
+        "author": null,
+        "seasons": null,
+        "durationMinutes": 169,
+        "addedAt": "2026-11-06T23:02:33Z"
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "item_create_invalid",
+      "title": "Criar com varios erros",
+      "doc": true,
+      "method": "POST",
+      "path": "/items",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "type": "book",
+        "title": "",
+        "genre": "Nada",
+        "status": "done",
+        "startedAt": "2026-09-10",
+        "finishedAt": "2026-09-01",
+        "rating": 11,
+        "pages": 0
+      },
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid item",
+          "fields": {
+            "title": "must not be empty",
+            "genre": "must be one of the values from /genres",
+            "startedAt": "must not be after finishedAt",
+            "rating": "must be an integer from 1 to 10",
+            "pages": "must be greater than zero"
+          }
+        }
+      },
+      "elapsedMs": 2
+    },
+    {
+      "id": "item_create_invalid_enums",
+      "title": "Criar com tipo e status invalidos",
+      "doc": true,
+      "method": "POST",
+      "path": "/items",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "type": "livro",
+        "status": "lendo"
+      },
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid item",
+          "fields": {
+            "type": "must be one of: book, series, movie",
+            "title": "must not be empty",
+            "status": "must be one of: want, in_progress, done"
+          }
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "item_create_malformed",
+      "title": "Criar com JSON malformado",
+      "doc": true,
+      "method": "POST",
+      "path": "/items",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": "{oops",
+      "status": 400,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "bad_request",
+          "message": "Malformed JSON body"
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "find_severance",
+      "title": "Busca para o PUT",
+      "doc": false,
+      "method": "GET",
+      "path": "/items?q=Severance",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [
+          {
+            "id": "it_0038",
+            "type": "series",
+            "title": "Severance",
+            "genre": "Suspense",
+            "status": "in_progress",
+            "startedAt": "2026-09-20",
+            "finishedAt": null,
+            "rating": null,
+            "note": "Segunda temporada",
+            "pages": null,
+            "author": null,
+            "seasons": 2,
+            "durationMinutes": null,
+            "addedAt": "2026-09-14T21:40:00Z"
+          }
+        ],
+        "page": 1,
+        "pageSize": 20,
+        "total": 1
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "item_put",
+      "title": "Terminar uma serie em andamento",
+      "doc": true,
+      "method": "PUT",
+      "path": "/items/it_0038",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "type": "series",
+        "title": "Severance",
+        "genre": "Suspense",
+        "status": "done",
+        "startedAt": "2026-09-20",
+        "finishedAt": "2026-09-28",
+        "rating": 9,
+        "note": null,
+        "pages": null,
+        "author": null,
+        "seasons": 2,
+        "durationMinutes": null
+      },
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "id": "it_0038",
+        "type": "series",
+        "title": "Severance",
+        "genre": "Suspense",
+        "status": "done",
+        "startedAt": "2026-09-20",
+        "finishedAt": "2026-09-28",
+        "rating": 9,
+        "note": null,
+        "pages": null,
+        "author": null,
+        "seasons": 2,
+        "durationMinutes": null,
+        "addedAt": "2026-09-14T21:40:00Z"
+      },
+      "elapsedMs": 5
+    },
+    {
+      "id": "item_put_invalid",
+      "title": "PUT com corpo invalido em id inexistente",
+      "doc": true,
+      "method": "PUT",
+      "path": "/items/it_9999",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "title": ""
+      },
+      "status": 422,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "validation",
+          "message": "Invalid item",
+          "fields": {
+            "type": "must be one of: book, series, movie",
+            "title": "must not be empty",
+            "status": "must be one of: want, in_progress, done"
+          }
+        }
+      },
+      "elapsedMs": 3
+    },
+    {
+      "id": "item_put_404",
+      "title": "PUT valido em id inexistente",
+      "doc": true,
+      "method": "PUT",
+      "path": "/items/it_9999",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>",
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "type": "book",
+        "title": "Qualquer",
+        "status": "want"
+      },
+      "status": 404,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "not_found",
+          "message": "Item it_9999 not found"
+        }
+      },
+      "elapsedMs": 2
+    },
+    {
+      "id": "item_delete",
+      "title": "Remover um item",
+      "doc": true,
+      "method": "DELETE",
+      "path": "/items/it_0046",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 204,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "responseBody": null,
+      "elapsedMs": 5
+    },
+    {
+      "id": "item_delete_again",
+      "title": "Remover o mesmo id de novo",
+      "doc": true,
+      "method": "DELETE",
+      "path": "/items/it_0046",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 404,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "not_found",
+          "message": "Item it_0046 not found"
+        }
+      },
+      "elapsedMs": 2
+    },
+    {
+      "id": "item_delete_other",
+      "title": "Limpeza",
+      "doc": false,
+      "method": "DELETE",
+      "path": "/items/it_0047",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 204,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "responseBody": null,
+      "elapsedMs": 0
+    },
+    {
+      "id": "reset",
+      "title": "Voltar ao seed",
+      "doc": true,
+      "method": "POST",
+      "path": "/reset",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 204,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "responseBody": null,
+      "elapsedMs": 3
+    },
+    {
+      "id": "after_reset",
+      "title": "Total depois do reset",
+      "doc": false,
+      "method": "GET",
+      "path": "/items?pageSize=1",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "items": [
+          {
+            "id": "it_0039",
+            "type": "movie",
+            "title": "Titanic",
+            "genre": "Romance",
+            "status": "in_progress",
+            "startedAt": "2026-10-30",
+            "finishedAt": null,
+            "rating": null,
+            "note": null,
+            "pages": null,
+            "author": null,
+            "seasons": null,
+            "durationMinutes": 195,
+            "addedAt": "2026-10-24T12:30:00Z"
+          }
+        ],
+        "page": 1,
+        "pageSize": 1,
+        "total": 45
+      },
+      "elapsedMs": 8
+    },
+    {
+      "id": "logout",
+      "title": "Logout",
+      "doc": true,
+      "method": "POST",
+      "path": "/auth/logout",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 204,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "responseBody": null,
+      "elapsedMs": 4
+    },
+    {
+      "id": "after_logout",
+      "title": "Token encerrado",
+      "doc": true,
+      "method": "GET",
+      "path": "/me",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 401,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "unauthorized",
+          "message": "Missing, unknown or ended token"
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "fail_500",
+      "title": "X-Fail: 500",
+      "doc": true,
+      "method": "GET",
+      "path": "/health",
+      "requestHeaders": {
+        "X-Fail": "500"
+      },
+      "requestBody": null,
+      "status": 500,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "internal",
+          "message": "Simulated failure"
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "fail_expired",
+      "title": "X-Fail: expired",
+      "doc": true,
+      "method": "GET",
+      "path": "/me",
+      "requestHeaders": {
+        "X-Fail": "expired"
+      },
+      "requestBody": null,
+      "status": 401,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "token_expired",
+          "message": "Token has expired"
+        }
+      },
+      "elapsedMs": 2
+    },
+    {
+      "id": "fail_timeout",
+      "title": "X-Fail: timeout",
+      "doc": true,
+      "method": "GET",
+      "path": "/health",
+      "requestHeaders": {
+        "X-Fail": "timeout"
+      },
+      "requestBody": null,
+      "status": 504,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "responseBody": "Gateway Timeout",
+      "elapsedMs": 505
+    },
+    {
+      "id": "delay",
+      "title": "X-Delay-Ms: 250",
+      "doc": true,
+      "method": "GET",
+      "path": "/health",
+      "requestHeaders": {
+        "X-Delay-Ms": "250"
+      },
+      "requestBody": null,
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "status": "ok",
+        "version": "0.1.0"
+      },
+      "elapsedMs": 252
+    },
+    {
+      "id": "cors",
+      "title": "OPTIONS (CORS)",
+      "doc": true,
+      "method": "OPTIONS",
+      "path": "/items",
+      "requestHeaders": {},
+      "requestBody": null,
+      "status": 204,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "responseBody": null,
+      "elapsedMs": 0
+    },
+    {
+      "id": "login_again",
+      "title": "Novo login",
+      "doc": false,
+      "method": "POST",
+      "path": "/auth/login",
+      "requestHeaders": {
+        "Content-Type": "application/json"
+      },
+      "requestBody": {
+        "email": "bruno@bibliotela.dev",
+        "password": "123456"
+      },
+      "status": 200,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "token": "tok_3zdkhiy3mq9miiisd5cet42o",
+        "user": {
+          "id": "usr_02",
+          "name": "Bruno Costa",
+          "email": "bruno@bibliotela.dev",
+          "avatarUrl": null,
+          "createdAt": "2024-05-02T14:30:00Z"
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "route_404",
+      "title": "Rota inexistente com token",
+      "doc": true,
+      "method": "GET",
+      "path": "/nada",
+      "requestHeaders": {
+        "Authorization": "Bearer <token>"
+      },
+      "requestBody": null,
+      "status": 404,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "not_found",
+          "message": "Route /nada not found"
+        }
+      },
+      "elapsedMs": 1
+    },
+    {
+      "id": "route_401",
+      "title": "Rota inexistente sem token",
+      "doc": true,
+      "method": "GET",
+      "path": "/nada",
+      "requestHeaders": {},
+      "requestBody": null,
+      "status": 401,
+      "responseHeaders": {
+        "access-control-allow-headers": "Authorization, Content-Type, X-Delay-Ms, X-Fail",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "access-control-max-age": "86400",
+        "content-type": "application/json; charset=utf-8"
+      },
+      "responseBody": {
+        "error": {
+          "code": "unauthorized",
+          "message": "Missing, unknown or ended token"
+        }
+      },
+      "elapsedMs": 1
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Bibliotela: livros, séries e filmes que você leu e assistiu">
+  <meta name="theme-color" content="#F8F6F3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Bibliotela">
+  <link rel="manifest" href="manifest.json">
+  <title>Bibliotela</title>
+</head>
+<body style="margin:0;background:#F8F6F3">
+  <!-- Fica visível só se o Flutter não conseguir iniciar. O app, quando abre, cobre este texto. -->
+  <div id="boot" style="font-family:sans-serif;padding:24px;color:#1F2328;font-size:15px">
+    Carregando a Bibliotela
+  </div>
+  <script>
+    window.addEventListener('error', function (e) {
+      var el = document.getElementById('boot');
+      if (el) el.textContent = 'Erro ao carregar: ' + (e.message || e);
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

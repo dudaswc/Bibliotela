@@ -1,0 +1,20 @@
+name: bibliotela_ds_catalog
+description: Catalogo interativo do Design System da Bibliotela (livros, series e filmes).
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bibliotela_design_system:
+    path: ../../packages/design_system
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

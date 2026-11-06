@@ -1,0 +1,35 @@
+/// Domain, data and formatting of the Bibliotela app. Pure Dart.
+library;
+
+export 'src/api/api_client.dart';
+export 'src/format/date_format.dart';
+export 'src/format/group_by.dart';
+export 'src/format/parse_list.dart';
+export 'src/format/validators.dart';
+export 'src/models/item.dart';
+export 'src/models/item_filter.dart';
+export 'src/models/item_status.dart';
+export 'src/models/item_type.dart';
+export 'src/models/json.dart';
+export 'src/models/local_date.dart';
+export 'src/models/page.dart';
+export 'src/models/session.dart';
+export 'src/models/summary.dart';
+export 'src/models/user.dart';
+export 'src/repositories/auth_repository.dart';
+export 'src/repositories/genre_repository.dart';
+export 'src/repositories/in_memory/in_memory_auth_repository.dart';
+export 'src/repositories/in_memory/in_memory_genre_repository.dart';
+export 'src/repositories/in_memory/in_memory_item_repository.dart';
+export 'src/repositories/in_memory/in_memory_user_repository.dart';
+export 'src/repositories/in_memory/sample_data.dart';
+export 'src/repositories/item_repository.dart';
+export 'src/repositories/remote/remote_auth_repository.dart';
+export 'src/repositories/remote/remote_genre_repository.dart';
+export 'src/repositories/remote/remote_item_repository.dart';
+export 'src/repositories/remote/remote_user_repository.dart';
+export 'src/repositories/user_repository.dart';
+export 'src/result/app_error.dart';
+export 'src/result/result.dart';
+export 'src/storage/in_memory_session_storage.dart';
+export 'src/storage/session_storage.dart';

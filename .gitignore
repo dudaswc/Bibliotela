@@ -1,32 +1,26 @@
-# Flutter / Dart
-.dart_tool/
-.packages
-.pub-cache/
-.pub/
-build/
-pubspec.lock
-.flutter-plugins
-.flutter-plugins-dependencies
-.metadata
+# Dart / Flutter, em qualquer pasta do repositorio
+**/.dart_tool/
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/build/
+**/pubspec.lock
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.metadata
 
-# IDEs
+# Arquivos que o Flutter gera sozinho
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Pods/
+**/android/.gradle/
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.*
+
+# Editores e sistema
 .idea/
 .vscode/
 *.iml
-
-# Android
-android/.gradle/
-android/local.properties
-android/**/GeneratedPluginRegistrant.*
-
-# iOS
-ios/Flutter/Generated.xcconfig
-ios/Flutter/flutter_export_environment.sh
-ios/Pods/
-
-# macOS
 .DS_Store
-
-# Arquivos gerados pelo Flutter no iOS
-ios/Flutter/ephemeral/
-ios/Runner/GeneratedPluginRegistrant.*
